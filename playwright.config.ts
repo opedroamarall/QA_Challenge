@@ -6,11 +6,15 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 1,
   workers: 1,
-  reporter: 'html',
+  reporter: [
+    ['html'], 
+    ['allure-playwright', { outputFolder: 'allure-results' }] 
+  ],
   use: {
     baseURL: 'https://demoqa.com',
     trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
+    screenshot: 'on',
+    video: 'on-first-retry',
   },
   projects: [
     {
