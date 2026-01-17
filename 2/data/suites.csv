@@ -1,0 +1,6 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","16960","Progress Bar - Control Flow","chromium","Sat Jan 17 06:37:15 UTC 2026","passed","Sat Jan 17 06:37:32 UTC 2026","Accenture Technical Challenge - DemoQA Automation","challenge.spec.ts","",""
+"","26078","Web Tables - Dynamic Data Management","chromium","Sat Jan 17 06:35:37 UTC 2026","passed","Sat Jan 17 06:36:03 UTC 2026","Accenture Technical Challenge - DemoQA Automation","challenge.spec.ts","",""
+"","4119","Browser Windows - Validation","chromium","Sat Jan 17 06:36:05 UTC 2026","passed","Sat Jan 17 06:36:09 UTC 2026","Accenture Technical Challenge - DemoQA Automation","challenge.spec.ts","",""
+"","3451","Upload and Download - File Validation","chromium","Sat Jan 17 06:37:32 UTC 2026","passed","Sat Jan 17 06:37:36 UTC 2026","Accenture Technical Challenge - DemoQA Automation","challenge.spec.ts","",""
+"","488","API - Book Store Flow","chromium","Sat Jan 17 06:33:34 UTC 2026","failed","Sat Jan 17 06:33:34 UTC 2026","Accenture Technical Challenge - DemoQA Automation","challenge.spec.ts","",""
