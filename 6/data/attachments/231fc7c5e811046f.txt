@@ -1,0 +1,3 @@
+User created successfully. ID: 6a3c759a-8a70-4bd0-bba4-0b6b239ef6c0
+Selecting books: Git Pocket Guide and Learning JavaScript Design Patterns
+Books validated in profile: [ 'Git Pocket Guide', 'Learning JavaScript Design Patterns' ]
