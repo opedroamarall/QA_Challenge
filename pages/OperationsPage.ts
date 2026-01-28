@@ -97,10 +97,8 @@ export class OperationsPage {
     const startStopButton = this.page.locator("#startStopButton");
     const progressBar = this.page.locator('div[role="progressbar"]');
 
-    // 1. Start progress
     await startStopButton.click();
 
-    // 2. Wait to reach a safe range below 25%
     await this.page.waitForFunction(() => {
       const val = parseInt(
         document
@@ -110,42 +108,26 @@ export class OperationsPage {
       return val >= 15 && val <= 22;
     });
 
-    // 3. Stop progress
     await startStopButton.click();
 
-    // Wait 5s for visualization as requested
     await this.page.waitForTimeout(5000);
 
-    // Validation
     const valueAfterStop = parseInt(
       (await progressBar.getAttribute("aria-valuenow")) || "0",
     );
     expect(valueAfterStop).toBeLessThanOrEqual(25);
-
-    // 4. Resume progress
     await startStopButton.click();
-
-    // 5. Wait for the bar to finish and turn green (bg-success)
     await this.page.waitForFunction(
       () => {
         return document.querySelector(".progress-bar.bg-success") !== null;
       },
       { timeout: 40000 },
     );
-
-    // 6. Interaction with Reset Button
-    // We use a specific locator and force the click to ensure the site registers it
     const resetButton = this.page.locator("#resetButton");
     await resetButton.waitFor({ state: "visible" });
-
-    // Brief pause to allow the site's JS to bind the event to the new button
     await this.page.waitForTimeout(1000);
     await resetButton.click({ force: true });
-
-    // Wait 5s for visualization
     await this.page.waitForTimeout(5000);
-
-    // 7. Final assertion with an explicit timeout to wait for the reset animation
     await expect(progressBar).toHaveAttribute("aria-valuenow", "0", {
       timeout: 10000,
     });
@@ -157,31 +139,26 @@ export class OperationsPage {
     for (let i = 0; i < targetOrder.length; i++) {
       const itemName = targetOrder[i];
 
-      // Localiza o item que queremos colocar na posição 'i'
       const itemToMove = this.page
         .locator(".list-group-item")
         .filter({ hasText: itemName })
         .first();
 
-      // Localiza quem está ocupando a posição 'i' atualmente
       const targetDestination = this.page.locator(".list-group-item").nth(i);
 
       const sourceBox = await itemToMove.boundingBox();
       const targetBox = await targetDestination.boundingBox();
 
       if (sourceBox && targetBox) {
-        // Se o item já estiver na posição correta (ou muito perto), pula para o próximo
         if (Math.abs(sourceBox.y - targetBox.y) < 5) {
           continue;
         }
 
-        // Usa o dragTo nativo que é mais estável para evitar erros de 'any' e referências circulares
         await itemToMove.dragTo(targetDestination, {
           force: true,
           timeout: 10000,
         });
 
-        // Pequena pausa para o site processar o rearranjo visual
         await this.page.waitForTimeout(1000);
       }
     }
